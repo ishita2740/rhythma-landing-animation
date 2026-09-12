@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown, Menu } from "lucide-react";
+import type { CSSProperties } from "react";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -132,7 +133,7 @@ function RhythmaLanding() {
           <div className="petal petal-three" aria-hidden="true" />
           <div className="petal petal-four" aria-hidden="true" />
           {languages.map((language, index) => (
-            <div className={`language-bubble ${language.position} tone-${language.tone}`} key={language.name} style={{ '--bubble-index': index } as React.CSSProperties}>
+            <div className={`language-bubble ${language.position} tone-${language.tone}`} key={language.name} style={{ '--bubble-index': index } as CSSProperties}>
               <strong>{language.native}</strong>
               <span>({language.name})</span>
             </div>
