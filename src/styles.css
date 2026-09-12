@@ -207,29 +207,101 @@ body { margin: 0; }
   flex: 1;
   min-height: 0;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(16px, 3vw, 44px);
+}
+
+.hero-split-container {
+  width: min(1360px, 94vw);
+  height: 100%;
+  max-height: calc(100vh - 120px);
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 60px);
+  position: relative;
+  z-index: 10;
+}
+
+/* ── Left Column: App Showcase ── */
+.hero-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
+.app-showcase-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 520px;
+  width: 100%;
+  height: 100%;
+  max-height: min(580px, 72vh);
+  animation: showcase-arrive 1.3s 0.2s cubic-bezier(.22,.7,.24,1) forwards;
+  opacity: 0;
+}
+
+.app-showcase-img {
+  max-width: 100%;
+  max-height: min(570px, 70vh);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 36px color-mix(in oklab, var(--plum-deep) 10%, transparent))
+          drop-shadow(0 4px 12px color-mix(in oklab, var(--rose) 8%, transparent));
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.app-showcase-wrap:hover .app-showcase-img {
+  transform: translateY(-4px) scale(1.015);
+  filter: drop-shadow(0 22px 42px color-mix(in oklab, var(--plum-deep) 16%, transparent))
+          drop-shadow(0 6px 16px color-mix(in oklab, var(--rose) 14%, transparent));
+}
+
+@keyframes showcase-arrive {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Right Column: Meditating Woman + Rhythma Brand ── */
+.hero-right {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 16px;
-}
-.scene {
+  text-align: center;
   position: relative;
-  width: min(1320px, 98vw);
-  height: clamp(320px, 44vh, 395px);
-  min-height: 310px;
-  flex-shrink: 0;
-  margin-top: clamp(20px, 2.8vh, 30px);
+  padding-bottom: 10px;
 }
 
-/* Center Soft Radiant Aura */
-.center-aura {
+.woman-scene {
+  position: relative;
+  width: min(500px, 100%);
+  height: clamp(240px, 33vh, 320px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.woman-scene .center-aura {
   position: absolute;
   left: 50%;
-  top: 53%;
-  width: min(610px, 82vw);
-  height: min(390px, 68vh);
+  top: 50%;
+  width: 85%;
+  height: 85%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, color-mix(in oklab, var(--rose) 20%, transparent) 0%, color-mix(in oklab, var(--lavender) 14%, transparent) 46%, transparent 72%);
+  background: radial-gradient(ellipse at center, color-mix(in oklab, var(--rose) 22%, transparent) 0%, color-mix(in oklab, var(--lavender) 14%, transparent) 48%, transparent 72%);
   border-radius: 50%;
   filter: blur(28px);
   pointer-events: none;
@@ -237,32 +309,35 @@ body { margin: 0; }
   animation: aura-pulse 6s ease-in-out infinite alternate;
 }
 
-/* Woman Illustration - Prominent, Unclipped Focal Point */
-.woman-wrap {
-  position: absolute;
+.woman-scene .woman-wrap {
+  position: relative;
   z-index: 20;
-  left: 50%;
-  bottom: -30px;
-  width: clamp(560px, 60vw, 810px);
-  transform: translateX(-50%);
+  width: 100%;
+  max-width: 460px;
+  height: 100%;
+  margin: 0 auto;
 }
+
 .woman-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  height: 100%;
+  aspect-ratio: 16 / 11;
   overflow: visible;
   opacity: 0;
   animation: woman-arrive 1.8s .2s cubic-bezier(.22,.7,.24,1) forwards;
 }
+
 .woman-frame::after {
   content: "";
   position: absolute;
   inset: auto 0 0;
-  height: 20%;
+  height: 18%;
   background: linear-gradient(to bottom, transparent, var(--cream));
   pointer-events: none;
   z-index: 25;
 }
+
 .woman-photo {
   position: absolute;
   left: 50%;
@@ -271,8 +346,7 @@ body { margin: 0; }
   height: 100%;
   object-fit: contain;
   transform: translate(-50%, -50%);
-  mix-blend-mode: multiply;
-  filter: drop-shadow(0 14px 30px color-mix(in oklab, var(--lavender) 14%, transparent));
+  filter: drop-shadow(0 12px 26px color-mix(in oklab, var(--lavender) 16%, transparent));
 }
 
 /* ═══════════════════════════════════════════════════
@@ -612,13 +686,22 @@ body { margin: 0; }
 .petal-six { right: 36%; top: 88%; width: 11px; height: 7px; background: var(--lavender); animation-delay: 2.0s, 2.6s; }
 
 /* Hero Copy */
-.hero-copy { position: relative; z-index: 15; margin-top: clamp(22px, 2.8vh, 30px); text-align: center; flex-shrink: 0; }
+.hero-copy {
+  position: relative;
+  z-index: 15;
+  margin-top: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
 .hero-copy h1 {
   margin: 0;
   font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
-  font-size: clamp(52px, 5.6vw, 72px);
+  font-size: clamp(42px, 4.2vw, 62px);
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: 0.01em;
   font-style: italic;
   background: linear-gradient(95deg, var(--plum-deep), var(--rose));
@@ -627,45 +710,71 @@ body { margin: 0; }
   background-clip: text;
   color: var(--plum-deep);
   opacity: 0;
-  animation: copy-rise .8s 0.5s ease forwards;
+  animation: copy-rise .8s 0.4s ease forwards;
 }
 .tagline {
   margin: 6px 0 0;
   font-family: "Outfit", sans-serif;
-  font-size: clamp(14px, 1.3vw, 18px);
-  font-weight: 400;
-  letter-spacing: .14em;
-  color: var(--ink);
+  font-size: clamp(14px, 1.2vw, 17.5px);
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: color-mix(in oklab, var(--plum-deep) 85%, transparent);
+  opacity: 0;
+  animation: copy-rise .8s 0.55s ease forwards;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
   opacity: 0;
   animation: copy-rise .8s 0.7s ease forwards;
 }
 
+.hero-cta-btn {
+  height: 40px;
+  border-radius: 999px;
+  padding-inline: 24px;
+  color: var(--cream);
+  font-size: 14px;
+  font-weight: 500;
+  background: linear-gradient(100deg, var(--plum-deep), var(--rose));
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--lavender) 28%, transparent);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.hero-cta-btn:hover {
+  opacity: .92;
+  transform: translateY(-2px);
+}
+
 .explore-link {
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
-  gap: 5px;
-  margin-top: clamp(10px, 2vh, 16px);
-  color: var(--ink);
-  font-size: 12px;
+  gap: 8px;
+  color: var(--plum-deep);
+  font-size: 13.5px;
   font-weight: 500;
   text-decoration: none;
-  opacity: 0;
-  animation: copy-rise .8s 0.9s ease forwards;
+  transition: color 0.25s ease;
+}
+.explore-link:hover {
+  color: var(--rose);
 }
 .arrow-circle {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid color-mix(in oklab, var(--rose) 58%, transparent);
+  width: 32px;
+  height: 32px;
+  border: 1px solid color-mix(in oklab, var(--rose) 50%, transparent);
   border-radius: 50%;
   color: var(--plum-deep);
   background: color-mix(in oklab, var(--cream) 70%, transparent);
-  box-shadow: 0 4px 14px color-mix(in oklab, var(--rose) 18%, transparent);
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--rose) 16%, transparent);
   animation: arrow-bob 2.6s 1.5s ease-in-out infinite;
 }
-.arrow-circle svg { width: 16px; height: 16px; }
+.arrow-circle svg { width: 15px; height: 15px; }
 
 /* Waves */
 .waves { position: absolute; z-index: 1; inset: auto 0 0; height: clamp(65px, 9vh, 85px); opacity: 0; animation: wave-entrance 1.2s 0.4s forwards; pointer-events: none; }
@@ -839,18 +948,17 @@ body { margin: 0; }
    Responsive Styles
    ══════════════════════════════════════════ */
 
-@media (max-width: 1024px) {
-  .scene { height: clamp(300px, 42vh, 360px); }
-  .woman-wrap { width: clamp(420px, 56vw, 600px); }
-  .floating-chip { opacity: 0.88; }
-  .chip-lg.chip-greeting { padding: 6px 14px; }
-  .chip-md.chip-greeting { padding: 5px 12px; }
-  .chip-sm.chip-greeting { padding: 4px 10px; }
-  .chip-term { padding: 3px 10px; }
-  .chip-lg .chip-text { font-size: 14px; }
-  .chip-md .chip-text { font-size: 12.5px; }
-  .chip-sm .chip-text { font-size: 11.5px; }
-  .chip-lang-badge { font-size: 8px; }
+@media (max-width: 1100px) {
+  .hero-split-container {
+    gap: 30px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .app-showcase-wrap {
+    max-height: min(520px, 64vh);
+  }
+  .woman-scene {
+    height: clamp(220px, 30vh, 290px);
+  }
 }
 
 @media (max-width: 900px) {
@@ -858,9 +966,33 @@ body { margin: 0; }
   .desktop-nav { display: none; }
   .mobile-menu { display: inline-flex; }
   .nav-actions { gap: 8px; }
-  .scene { width: 100%; height: clamp(280px, 40vh, 340px); min-height: 280px; }
-  .woman-wrap { width: clamp(360px, 62vw, 500px); }
-  .floating-chip { padding: 4px 10px; }
+  
+  .rhythma-page { height: auto; min-height: 100svh; overflow-y: auto; }
+  .hero {
+    min-height: calc(100svh - 60px);
+    padding: 20px 20px 80px;
+  }
+  .hero-split-container {
+    grid-template-columns: 1fr;
+    max-height: none;
+    height: auto;
+    gap: 40px;
+  }
+  .hero-right {
+    order: 1;
+    padding-bottom: 0;
+  }
+  .hero-left {
+    order: 2;
+  }
+  .woman-scene {
+    width: 100%;
+    max-width: 440px;
+    height: 260px;
+  }
+  .app-showcase-wrap {
+    max-height: 480px;
+  }
 }
 
 @media (max-width: 680px) {
@@ -870,27 +1002,23 @@ body { margin: 0; }
   .brand-logo { width: 30px; height: 30px; }
   .brand svg { width: 36px; height: 28px; }
   .download-button { display: none; }
-  .hero { min-height: calc(100svh - 60px); justify-content: center; padding-bottom: 70px; }
-  .scene { height: 310px; min-height: 280px; }
-  .woman-wrap { width: clamp(300px, 84vw, 420px); bottom: 0; }
   
-  /* On small screens, selectively show key multilingual greetings with generous spacing */
-  .chip-term { display: none; }
-  .chip-sm { display: none; }
-  .floating-chip { padding: 4px 10px; border-radius: 999px; }
-  .chip-lg .chip-text { font-size: 13px; }
-  .chip-md .chip-text { font-size: 12px; }
-  .chip-lang-badge { display: none; }
+  .hero { padding: 14px 14px 70px; }
+  .hero-split-container { gap: 28px; }
+  .woman-scene { height: 220px; }
+  .app-showcase-wrap { max-height: 380px; }
   
-  .hero-copy { margin-top: 12px; padding-inline: 16px; }
+  .hero-copy { margin-top: 8px; padding-inline: 12px; }
   .hero-copy h1 { font-size: 38px; }
   .tagline { font-size: 13.5px; letter-spacing: .08em; }
+  .hero-actions { flex-direction: column; gap: 10px; margin-top: 14px; }
+  .hero-cta-btn { width: 100%; max-width: 220px; height: 38px; }
   .waves { height: 60px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }
-  .entrance-nav, .woman-frame, .petal, .hero-copy h1, .tagline, .explore-link, .waves, .floating-chip, .center-aura, .ambient-dot, .hair-strand, .woman-photo {
+  .entrance-nav, .woman-frame, .petal, .hero-copy h1, .tagline, .explore-link, .waves, .center-aura, .hair-strand, .woman-photo, .app-showcase-wrap, .hero-actions {
     animation: none !important;
     opacity: 1 !important;
     filter: none !important;
@@ -899,6 +1027,5 @@ body { margin: 0; }
     filter: none !important;
     transform: none !important;
   }
-  .floating-chip { opacity: 0.9 !important; }
   .arrow-circle { animation: none; }
 }
