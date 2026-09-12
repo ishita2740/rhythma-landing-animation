@@ -24,17 +24,17 @@ export const Route = createFileRoute("/")({
 });
 
 const languages = [
-  { native: "नमस्ते", name: "Hindi", position: "language-1", tone: "pink" },
-  { native: "Hello", name: "English", position: "language-2", tone: "lavender" },
-  { native: "Namaskar", name: "Marathi", position: "language-3", tone: "aqua" },
-  { native: "নমস্কার", name: "Bengali", position: "language-4", tone: "pink" },
-  { native: "ਮੈਂ ਸੀ ਭਵਾਲ", name: "Punjabi", position: "language-5", tone: "peach" },
-  { native: "નમસ્તે", name: "Gujarati", position: "language-6", tone: "lavender" },
-  { native: "வணக்கம்", name: "Tamil", position: "language-7", tone: "aqua" },
-  { native: "ನಮಸ್ಕಾರ", name: "Kannada", position: "language-8", tone: "peach" },
-  { native: "നമസ്കാരം", name: "Malayalam", position: "language-9", tone: "pink" },
-  { native: "తెలుగు నమస్కారం", name: "Telugu", position: "language-10", tone: "aqua" },
-  { native: "ଓଡ଼ିଆ ନମସ୍କାର", name: "Odia", position: "language-11", tone: "lavender" },
+  { native: "नमस्ते", name: "Hindi", tone: "pink" },
+  { native: "Hello", name: "English", tone: "lavender" },
+  { native: "Namaskar", name: "Marathi", tone: "aqua" },
+  { native: "নমস্কার", name: "Bengali", tone: "pink" },
+  { native: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ", name: "Punjabi", tone: "peach" },
+  { native: "નમસ્તે", name: "Gujarati", tone: "lavender" },
+  { native: "வணக்கம்", name: "Tamil", tone: "aqua" },
+  { native: "ನಮಸ್ಕಾರ", name: "Kannada", tone: "peach" },
+  { native: "നമസ്കാരം", name: "Malayalam", tone: "pink" },
+  { native: "నమస్కారం", name: "Telugu", tone: "aqua" },
+  { native: "ନମସ୍କାର", name: "Odia", tone: "lavender" },
 ];
 
 function LotusLogo() {
@@ -133,9 +133,10 @@ function RhythmaLanding() {
           <div className="petal petal-three" aria-hidden="true" />
           <div className="petal petal-four" aria-hidden="true" />
           {languages.map((language, index) => (
-            <div className={`language-bubble ${language.position} tone-${language.tone}`} key={language.name} style={{ '--bubble-index': index } as CSSProperties}>
-              <strong>{language.native}</strong>
-              <span>({language.name})</span>
+            <div className="language-orbit" key={language.name} style={{ '--bubble-index': index } as CSSProperties}>
+              <div className={`language-bubble tone-${language.tone}`} title={language.name}>
+                <strong>{language.native}</strong>
+              </div>
             </div>
           ))}
           <div className="woman-wrap"><WomanIllustration /></div>
