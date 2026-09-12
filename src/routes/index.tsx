@@ -107,17 +107,17 @@ const ambientPetals = [
   { tone: "peach",    pos: { top: "64%",   left: "47.5%" }, w: 10, h: 5, anim: "drift-petal-3", delay: "4s" },
 ];
 
-function LotusLogo() {
+function RhythmaLogo() {
   return (
-    <svg viewBox="0 0 56 42" className="h-9 w-12" fill="none" aria-hidden="true">
-      <g stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M28 37C20 28 20 16 28 4c8 12 8 24 0 33Z" />
-        <path d="M27 37C15 34 9 26 9 15c10 2 17 10 18 22Z" />
-        <path d="M29 37c12-3 18-11 18-22-10 2-17 10-18 22Z" />
-        <path d="M24 37C13 39 5 34 3 24c9-1 17 4 21 13Z" />
-        <path d="M32 37c11 2 19-3 21-13-9-1-17 4-21 13Z" />
-      </g>
-    </svg>
+    <img
+      src="/rhythma-logo.png"
+      alt="Rhythma Logo"
+      className="brand-logo"
+      width={36}
+      height={36}
+      loading="eager"
+      decoding="async"
+    />
   );
 }
 
@@ -200,7 +200,7 @@ function RhythmaLanding() {
 
       <header className="rhythma-nav entrance-nav">
         <a href="#top" className="brand" aria-label="Rhythma home">
-          <LotusLogo />
+          <RhythmaLogo />
           <span>Rhythma</span>
         </a>
         <nav className="desktop-nav" aria-label="Primary navigation">
