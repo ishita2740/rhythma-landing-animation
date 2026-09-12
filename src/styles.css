@@ -202,8 +202,8 @@ body { margin: 0; }
 .tone-lavender { color: var(--plum-deep); background: color-mix(in oklab, var(--lavender) 12%, var(--cream)); border-color: color-mix(in oklab, var(--lavender) 22%, transparent); }
 .tone-aqua { color: #318a95; background: color-mix(in oklab, var(--aqua) 16%, var(--cream)); border-color: color-mix(in oklab, var(--aqua) 25%, transparent); }
 .tone-peach { color: #cf7047; background: color-mix(in oklab, var(--peach) 17%, var(--cream)); border-color: color-mix(in oklab, var(--peach) 27%, transparent); }
-.petal { position: absolute; z-index: 3; width: 13px; height: 7px; border-radius: 100% 0 100% 0; opacity: 0; animation: orbit-reveal .5s 5s forwards, petal-float 5s 5.5s ease-in-out infinite; }
-.petal-one { left: 35%; top: 22%; background: var(--lavender); }.petal-two { right: 29%; top: 45%; background: var(--rose); animation-delay: 5.1s, 5.6s; }.petal-three { left: 21%; top: 61%; background: var(--aqua); animation-delay: 5.2s, 5.7s; }.petal-four { right: 18%; top: 74%; background: var(--peach); animation-delay: 5.3s, 5.8s; }
+.petal { position: absolute; z-index: 3; width: 13px; height: 7px; border-radius: 100% 0 100% 0; opacity: 0; animation: orbit-reveal .5s 3s forwards, petal-float 5s 3.5s ease-in-out infinite; }
+.petal-one { left: 35%; top: 22%; background: var(--lavender); }.petal-two { right: 29%; top: 45%; background: var(--rose); animation-delay: 3.1s, 3.6s; }.petal-three { left: 21%; top: 61%; background: var(--aqua); animation-delay: 3.2s, 3.7s; }.petal-four { right: 18%; top: 74%; background: var(--peach); animation-delay: 3.3s, 3.8s; }
 
 .hero-copy { position: relative; z-index: 15; margin-top: 38px; text-align: center; }
 .hero-copy h1 { margin: 0; font-family: "Outfit", sans-serif; font-size: clamp(50px, 5.2vw, 76px); font-weight: 400; line-height: 1; letter-spacing: 0; color: transparent; background: linear-gradient(95deg, var(--plum-deep), var(--rose)); background-clip: text; opacity: 0; animation: copy-rise .8s 5.9s ease forwards; }
