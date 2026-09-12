@@ -133,21 +133,8 @@ function RhythmaLanding() {
 
       <main id="top" className="hero">
         <div className="hero-split-container">
-          {/* Left Column: App Showcase */}
+          {/* Left Column: Meditating Woman in Big + Rhythma Brand Text */}
           <div className="hero-left">
-            <div className="app-showcase-wrap">
-              <img
-                src={appShowcaseImage}
-                alt="Rhythma App Showcase - Multilingual AI Health Assistant with Privacy First, Offline Support, SMS Reminders, and AI Guidance"
-                className="app-showcase-img"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </div>
-
-          {/* Right Column: Meditating Woman + Rhythma Brand Text */}
-          <div className="hero-right">
             <div className="woman-scene" aria-label="Meditating woman illustration">
               <div className="center-aura" aria-hidden="true" />
               <div className="woman-wrap">
@@ -163,6 +150,19 @@ function RhythmaLanding() {
                 <span>Explore Features</span>
               </a>
             </section>
+          </div>
+
+          {/* Right Column: App Showcase */}
+          <div className="hero-right">
+            <div className="app-showcase-wrap">
+              <img
+                src={appShowcaseImage}
+                alt="Rhythma App Showcase - Multilingual AI Health Assistant with Privacy First, Offline Support, SMS Reminders, and AI Guidance"
+                className="app-showcase-img"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
       </main>

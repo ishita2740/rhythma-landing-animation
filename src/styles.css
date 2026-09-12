@@ -217,15 +217,26 @@ body { margin: 0; }
   height: 100%;
   max-height: calc(100vh - 110px);
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
+  grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
   gap: clamp(20px, 3.5vw, 48px);
   position: relative;
   z-index: 10;
 }
 
-/* ── Left Column: App Showcase ── */
+/* ── Left Column: Meditating Woman in Big + Rhythma Brand ── */
 .hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+/* ── Right Column: App Showcase ── */
+.hero-right {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,17 +283,6 @@ body { margin: 0; }
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-}
-
-/* ── Right Column: Meditating Woman + Rhythma Brand ── */
-.hero-right {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  padding-bottom: 6px;
 }
 
 .woman-scene {
@@ -981,11 +981,11 @@ body { margin: 0; }
     height: auto;
     gap: 40px;
   }
-  .hero-right {
+  .hero-left {
     order: 1;
     padding-bottom: 0;
   }
-  .hero-left {
+  .hero-right {
     order: 2;
   }
   .woman-scene {
