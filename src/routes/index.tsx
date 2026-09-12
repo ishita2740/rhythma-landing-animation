@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown, Menu } from "lucide-react";
 import type { CSSProperties } from "react";
 import { Button } from "@/components/ui/button";
+import womanAsset from "@/assets/rhythma-woman.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
