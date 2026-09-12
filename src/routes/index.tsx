@@ -146,8 +146,8 @@ function RhythmaLanding() {
               <h1 id="rhythma-title">Rhythma</h1>
               <p className="tagline">Her Rhythm. Her Health. Her Power.</p>
               <a className="explore-link" href="#explore" aria-label="Explore Rhythma">
-                <span className="arrow-circle"><ArrowDown /></span>
                 <span>Explore Features</span>
+                <span className="arrow-circle"><ArrowDown /></span>
               </a>
             </section>
           </div>
