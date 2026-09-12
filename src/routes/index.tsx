@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown, Menu } from "lucide-react";
 import type { CSSProperties } from "react";
 import { Button } from "@/components/ui/button";
-import womanAsset from "@/assets/rhythma-woman.png.asset.json";
+
 
 
 export const Route = createFileRoute("/")({
@@ -58,7 +58,7 @@ function WomanIllustration() {
     <div className="woman-frame">
       <img
         className="woman-photo"
-        src={womanAsset.url}
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-VVVZ3cMnooIAnqdexGR4GjkySXmaP8.png"
         alt="Serene Indian woman with closed eyes greeting with Namaste"
       />
     </div>
