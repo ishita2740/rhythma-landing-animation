@@ -117,7 +117,6 @@ function RhythmaLanding() {
           ))}
         </nav>
         <div className="nav-actions">
-          <a className="login-link" href="#login">Log In</a>
           <Button asChild className="download-button"><a href="#download">Download App</a></Button>
           <Button variant="ghost" size="icon" className="mobile-menu" aria-label="Open menu"><Menu /></Button>
         </div>
@@ -145,7 +144,6 @@ function RhythmaLanding() {
         <section className="hero-copy" aria-labelledby="rhythma-title">
           <h1 id="rhythma-title">Rhythma</h1>
           <p className="tagline">Her Rhythm. Her Health. Her Power.</p>
-          <p className="subtitle">An AI-powered multilingual women’s health companion.</p>
           <a className="explore-link" href="#explore" aria-label="Explore Rhythma">
             <span className="arrow-circle"><ArrowDown /></span>
             <span>Explore Rhythma</span>
