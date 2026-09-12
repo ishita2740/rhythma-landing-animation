@@ -158,15 +158,10 @@ function RhythmaLanding() {
             <section className="hero-copy" aria-labelledby="rhythma-title">
               <h1 id="rhythma-title">Rhythma</h1>
               <p className="tagline">Her Rhythm. Her Health. Her Power.</p>
-              <div className="hero-actions">
-                <Button asChild className="hero-cta-btn">
-                  <a href="#download">Download App</a>
-                </Button>
-                <a className="explore-link" href="#explore" aria-label="Explore Rhythma">
-                  <span className="arrow-circle"><ArrowDown /></span>
-                  <span>Explore Features</span>
-                </a>
-              </div>
+              <a className="explore-link" href="#explore" aria-label="Explore Rhythma">
+                <span className="arrow-circle"><ArrowDown /></span>
+                <span>Explore Features</span>
+              </a>
             </section>
           </div>
         </div>
