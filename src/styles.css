@@ -157,8 +157,12 @@ body { margin: 0; }
 
 .rhythma-page {
   position: relative;
+  height: 100vh;
   min-height: 100svh;
+  max-height: 100vh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   background: radial-gradient(circle at 50% 25%, color-mix(in oklab, var(--rose) 9%, transparent), transparent 34%), var(--cream);
   color: var(--ink);
   font-family: "Figtree", sans-serif;
@@ -168,94 +172,719 @@ body { margin: 0; }
   position: relative;
   z-index: 30;
   width: min(1180px, calc(100% - 48px));
-  height: 72px;
+  height: 60px;
+  flex-shrink: 0;
   margin-inline: auto;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
 }
 .brand { display: inline-flex; align-items: center; gap: 8px; width: fit-content; color: var(--plum-deep); font-family: "Outfit", sans-serif; font-size: 24px; font-weight: 500; text-decoration: none; }
-.desktop-nav { display: flex; gap: clamp(22px, 2.4vw, 38px); align-items: center; }
-.desktop-nav a { color: color-mix(in oklab, var(--ink) 84%, transparent); font-size: 13px; font-weight: 500; text-decoration: none; transition: color .25s ease; }
+.desktop-nav { display: flex; gap: clamp(20px, 2.2vw, 34px); align-items: center; }
+.desktop-nav a { color: color-mix(in oklab, var(--ink) 85%, transparent); font-size: 17px; font-weight: 500; text-decoration: none; transition: color .25s ease; letter-spacing: -0.01em; }
 .desktop-nav a:hover { color: var(--rose); }
-.nav-actions { justify-self: end; display: flex; align-items: center; gap: 24px; }
-.download-button { height: 38px; border: 0; border-radius: 999px; padding-inline: 24px; color: var(--cream); background: linear-gradient(100deg, var(--plum-deep), var(--rose)); box-shadow: 0 8px 24px color-mix(in oklab, var(--lavender) 25%, transparent); }
+.nav-actions { justify-self: end; display: flex; align-items: center; gap: 20px; }
+.download-button { margin-top: 8px; height: 38px; border: 0; border-radius: 999px; padding-inline: 24px; color: var(--cream); font-size: 14.5px; font-weight: 500; background: linear-gradient(100deg, var(--plum-deep), var(--rose)); box-shadow: 0 8px 24px color-mix(in oklab, var(--lavender) 25%, transparent); }
 .download-button:hover { opacity: .9; }
 .mobile-menu { display: none; color: var(--plum-deep); }
 
-.hero { position: relative; z-index: 2; min-height: calc(100svh - 72px); display: flex; flex-direction: column; align-items: center; padding-bottom: 74px; }
-.scene { position: relative; width: min(1050px, 94vw); height: min(55vh, 510px); min-height: 430px; }
-.woman-wrap { position: absolute; z-index: 20; left: 50%; bottom: -2px; width: clamp(300px, 33vw, 430px); transform: translateX(-50%); }
-.woman-frame { position: relative; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; opacity: 0; animation: woman-arrive 2.1s .35s cubic-bezier(.22,.7,.24,1) forwards; }
-.woman-frame::after { content: ""; position: absolute; inset: auto 0 0; height: 16%; background: linear-gradient(to bottom, transparent, var(--cream)); pointer-events: none; }
-.woman-photo { position: absolute; left: 50%; top: 50%; width: 320%; transform: translate(-50%, -50%); mix-blend-mode: multiply; filter: drop-shadow(0 14px 26px color-mix(in oklab, var(--lavender) 10%, transparent)); }
+.hero {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 16px;
+}
+.scene {
+  position: relative;
+  width: min(1320px, 98vw);
+  height: clamp(320px, 44vh, 395px);
+  min-height: 310px;
+  flex-shrink: 0;
+  margin-top: clamp(20px, 2.8vh, 30px);
+}
 
-.orbit-line { position: absolute; left: 50%; top: 47%; border: 1px solid color-mix(in oklab, var(--lavender) 25%, transparent); border-radius: 50%; opacity: 0; transform: translate(-50%, -50%) rotate(-8deg); animation: orbit-reveal .8s 2.3s ease forwards; }
-.orbit-line-one { width: 56%; height: 52%; }
-.orbit-line-two { width: 82%; height: 66%; border-color: color-mix(in oklab, var(--aqua) 30%, transparent); transform: translate(-50%, -50%) rotate(8deg); }
-.orbit-line-three { width: 98%; height: 76%; border-color: color-mix(in oklab, var(--rose) 24%, transparent); transform: translate(-50%, -50%) rotate(-4deg); }
-.language-orbit { --orbit-duration: 38s; --start-angle: calc(var(--bubble-index) * 32.727deg); position: absolute; z-index: 8; left: 50%; top: 47%; width: 0; height: 0; transform: translate(calc(cos(var(--orbit-angle)) * min(44vw, 490px)), calc(sin(var(--orbit-angle)) * min(19vw, 186px))); animation: language-orbit var(--orbit-duration) 2.9s linear infinite; }
+/* Center Soft Radiant Aura */
+.center-aura {
+  position: absolute;
+  left: 50%;
+  top: 53%;
+  width: min(610px, 82vw);
+  height: min(390px, 68vh);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, color-mix(in oklab, var(--rose) 20%, transparent) 0%, color-mix(in oklab, var(--lavender) 14%, transparent) 46%, transparent 72%);
+  border-radius: 50%;
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 5;
+  animation: aura-pulse 6s ease-in-out infinite alternate;
+}
 
-.language-bubble { --bubble-delay: calc(2.4s + (var(--bubble-index) * .11s)); min-width: 118px; padding: 12px 20px; border: 1px solid transparent; border-radius: 999px; text-align: center; opacity: 0; transform: translate(-50%, -50%) scale(.7); animation: bubble-arrive .65s var(--bubble-delay) cubic-bezier(.2,.8,.2,1) forwards; backdrop-filter: blur(4px); box-shadow: 0 10px 30px color-mix(in oklab, var(--lavender) 10%, transparent); }
-.language-bubble strong { display: block; font-size: clamp(14px, 1.3vw, 19px); line-height: 1.05; font-weight: 500; }
-.tone-pink { color: #c44e94; background: color-mix(in oklab, var(--rose) 14%, var(--cream)); border-color: color-mix(in oklab, var(--rose) 25%, transparent); }
-.tone-lavender { color: var(--plum-deep); background: color-mix(in oklab, var(--lavender) 12%, var(--cream)); border-color: color-mix(in oklab, var(--lavender) 22%, transparent); }
-.tone-aqua { color: #318a95; background: color-mix(in oklab, var(--aqua) 16%, var(--cream)); border-color: color-mix(in oklab, var(--aqua) 25%, transparent); }
-.tone-peach { color: #cf7047; background: color-mix(in oklab, var(--peach) 17%, var(--cream)); border-color: color-mix(in oklab, var(--peach) 27%, transparent); }
-.petal { position: absolute; z-index: 3; width: 13px; height: 7px; border-radius: 100% 0 100% 0; opacity: 0; animation: orbit-reveal .5s 3s forwards, petal-float 5s 3.5s ease-in-out infinite; }
-.petal-one { left: 35%; top: 22%; background: var(--lavender); }.petal-two { right: 29%; top: 45%; background: var(--rose); animation-delay: 3.1s, 3.6s; }.petal-three { left: 21%; top: 61%; background: var(--aqua); animation-delay: 3.2s, 3.7s; }.petal-four { right: 18%; top: 74%; background: var(--peach); animation-delay: 3.3s, 3.8s; }
+/* Woman Illustration - Prominent, Unclipped Focal Point */
+.woman-wrap {
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  bottom: -30px;
+  width: clamp(560px, 60vw, 810px);
+  transform: translateX(-50%);
+}
+.woman-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: visible;
+  opacity: 0;
+  animation: woman-arrive 1.8s .2s cubic-bezier(.22,.7,.24,1) forwards;
+}
+.woman-frame::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 20%;
+  background: linear-gradient(to bottom, transparent, var(--cream));
+  pointer-events: none;
+  z-index: 25;
+}
+.woman-photo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 14px 30px color-mix(in oklab, var(--lavender) 14%, transparent));
+}
 
-.hero-copy { position: relative; z-index: 15; margin-top: 38px; text-align: center; }
-.hero-copy h1 { margin: 0; font-family: "Outfit", sans-serif; font-size: clamp(50px, 5.2vw, 76px); font-weight: 400; line-height: 1; letter-spacing: 0; color: transparent; background: linear-gradient(95deg, var(--plum-deep), var(--rose)); background-clip: text; opacity: 0; animation: copy-rise .8s 3.9s ease forwards; }
-.tagline { margin: 14px 0 0; font-family: "Outfit", sans-serif; font-size: clamp(18px, 1.8vw, 25px); font-weight: 400; letter-spacing: .16em; color: var(--ink); opacity: 0; animation: copy-rise .8s 4.25s ease forwards; }
+/* ═══════════════════════════════════════════════════
+   Hair Breeze System — 4 independent strand layers
+   ═══════════════════════════════════════════════════
+   Each layer renders the FULL image but clips + masks
+   to reveal only a narrow strip of loose hair.
+   The face, body, hands, and clothing are completely
+   excluded so only the outer hair strands move.
 
-.explore-link { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 24px; color: var(--ink); font-size: 13px; font-weight: 500; text-decoration: none; opacity: 0; animation: copy-rise .8s 4.8s ease forwards; }
-.arrow-circle { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid color-mix(in oklab, var(--rose) 58%, transparent); border-radius: 50%; color: var(--plum-deep); background: color-mix(in oklab, var(--cream) 70%, transparent); box-shadow: 0 5px 18px color-mix(in oklab, var(--rose) 19%, transparent); animation: arrow-bob 2.6s 5.6s ease-in-out infinite; }
-.arrow-circle svg { width: 19px; height: 19px; }
-.waves { position: absolute; z-index: 1; inset: auto 0 0; height: 128px; opacity: 0; animation: orbit-reveal 1s 5s forwards; }
-.waves svg { display: block; width: 100%; height: 100%; }.wave-back { fill: color-mix(in oklab, var(--lavender) 13%, transparent); }.wave-mid { fill: color-mix(in oklab, var(--rose) 10%, transparent); }.wave-front { fill: color-mix(in oklab, var(--lavender) 9%, transparent); }
-.entrance-nav { opacity: 0; animation: orbit-reveal .8s .15s forwards; }
+   Image analysis (1824×862 PNG, object-fit: contain):
+   - Hair top crown:    ~12% vertical
+   - Face zone:         ~18-42% vertical,  ~38-62% horizontal
+   - Left hair cascade: ~15-65% vertical,  ~20-40% horizontal
+   - Right hair cascade:~15-65% vertical,  ~60-80% horizontal
+   - Hands/body:        ~48-85% vertical,  ~35-65% horizontal
+   ═════════════════════════════════════════════════════ */
 
-@keyframes woman-arrive { from { opacity: 0; transform: scale(1.045); filter: blur(7px); } to { opacity: 1; transform: scale(1); filter: blur(0); } }
-@keyframes orbit-reveal { to { opacity: 1; } }
-@property --orbit-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-@keyframes language-orbit { from { --orbit-angle: var(--start-angle); } to { --orbit-angle: calc(var(--start-angle) + 360deg); } }
-@keyframes bubble-arrive { to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
-@keyframes petal-float { 0%,100% { transform: translate3d(0,0,0) rotate(0); } 50% { transform: translate3d(8px,-10px,0) rotate(24deg); } }
-@keyframes copy-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes arrow-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+.hair-strand {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 22;
+  will-change: transform;
+}
+
+.hair-strand-img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
+}
+
+/* ── Strand 1: Left outer hair tip / flowing end ──
+   The wispy strand that curls outward on her left side,
+   roughly 22-38% horizontal, 35-65% vertical */
+.hair-strand-1 {
+  clip-path: polygon(20% 30%, 38% 25%, 42% 55%, 36% 68%, 20% 68%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 75% at 30% 48%, black 25%, transparent 70%);
+  mask-image: radial-gradient(ellipse 80% 75% at 30% 48%, black 25%, transparent 70%);
+  filter: url(#hair-wave-1);
+  animation: hair-sway-1 10s ease-in-out infinite alternate;
+  animation-delay: 0s;
+}
+
+/* ── Strand 2: Left upper wave / shoulder-level hair ──
+   The wave near her left ear/shoulder, roughly 28-44% h, 18-42% v */
+.hair-strand-2 {
+  clip-path: polygon(28% 15%, 44% 15%, 44% 45%, 35% 50%, 28% 42%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 36% 30%, black 20%, transparent 65%);
+  mask-image: radial-gradient(ellipse 70% 70% at 36% 30%, black 20%, transparent 65%);
+  filter: url(#hair-wave-2);
+  animation: hair-sway-2 8s ease-in-out infinite alternate;
+  animation-delay: 1.2s;
+}
+
+/* ── Strand 3: Right upper wave / shoulder-level hair ──
+   Mirror of strand 2, roughly 56-72% h, 18-42% v */
+.hair-strand-3 {
+  clip-path: polygon(56% 15%, 72% 15%, 72% 42%, 65% 50%, 56% 45%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 64% 30%, black 20%, transparent 65%);
+  mask-image: radial-gradient(ellipse 70% 70% at 64% 30%, black 20%, transparent 65%);
+  filter: url(#hair-wave-3);
+  animation: hair-sway-3 9s ease-in-out infinite alternate;
+  animation-delay: 0.6s;
+}
+
+/* ── Strand 4: Right outer hair tip / flowing end ──
+   Mirror of strand 1, roughly 58-80% h, 35-65% v */
+.hair-strand-4 {
+  clip-path: polygon(58% 25%, 80% 30%, 80% 68%, 64% 68%, 58% 55%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 75% at 70% 48%, black 25%, transparent 70%);
+  mask-image: radial-gradient(ellipse 80% 75% at 70% 48%, black 25%, transparent 70%);
+  filter: url(#hair-wave-4);
+  animation: hair-sway-4 11s ease-in-out infinite alternate;
+  animation-delay: 1.8s;
+}
+
+/* ── Hair sway keyframes ──
+   Extremely subtle translations (1-3px) and micro-rotations (0.3-0.6°).
+   Each strand has a unique rhythm. transform-origin is set at the
+   "root" of each strand (where hair meets scalp) so the tips
+   swing more than the roots — like real hair physics. */
+
+@keyframes hair-sway-1 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(-2px, 0.5px) rotate(-0.4deg); }
+  66%  { transform: translate(1px, -0.5px) rotate(0.2deg); }
+  100% { transform: translate(-1.5px, 0.8px) rotate(-0.3deg); }
+}
+
+@keyframes hair-sway-2 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  40%  { transform: translate(-1px, 0.3px) rotate(-0.25deg); }
+  80%  { transform: translate(0.8px, -0.3px) rotate(0.15deg); }
+  100% { transform: translate(-0.5px, 0.4px) rotate(-0.1deg); }
+}
+
+@keyframes hair-sway-3 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  35%  { transform: translate(1px, 0.3px) rotate(0.25deg); }
+  75%  { transform: translate(-0.8px, -0.3px) rotate(-0.15deg); }
+  100% { transform: translate(0.5px, 0.5px) rotate(0.1deg); }
+}
+
+@keyframes hair-sway-4 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  30%  { transform: translate(2px, 0.5px) rotate(0.4deg); }
+  65%  { transform: translate(-1px, -0.5px) rotate(-0.2deg); }
+  100% { transform: translate(1.5px, 0.8px) rotate(0.3deg); }
+}
+
+/* ── Ambient Floating Particles — full page ── */
+.ambient-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+.ambient-dot {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+.dot-lavender { background: var(--lavender); }
+.dot-rose { background: var(--rose); }
+.dot-aqua { background: var(--aqua); }
+.dot-peach { background: var(--peach); }
+.dot-pink { background: var(--rose); }
+
+/* Drifting petals in transition space */
+.ambient-petal {
+  position: absolute;
+  border-radius: 100% 0 100% 0;
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 5px rgba(232, 180, 192, 0.25));
+}
+.petal-rose { background: var(--rose); }
+.petal-lavender { background: var(--lavender); }
+.petal-peach { background: var(--peach); }
+.petal-aqua { background: var(--aqua); }
+
+@keyframes drift-petal-1 {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  20% { opacity: 0.65; }
+  55% { opacity: 0.8; transform: translate(8px, -10px) rotate(18deg); }
+  85% { opacity: 0.6; }
+  100% { opacity: 0; transform: translate(-4px, -22px) rotate(32deg); }
+}
+.drift-petal-1 { animation: drift-petal-1 11s ease-in-out infinite; }
+
+@keyframes drift-petal-2 {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  25% { opacity: 0.6; }
+  60% { opacity: 0.75; transform: translate(-8px, -12px) rotate(-16deg); }
+  85% { opacity: 0.55; }
+  100% { opacity: 0; transform: translate(6px, -24px) rotate(-28deg); }
+}
+.drift-petal-2 { animation: drift-petal-2 13s ease-in-out infinite; }
+
+@keyframes drift-petal-3 {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  20% { opacity: 0.7; }
+  50% { opacity: 0.82; transform: translate(7px, -8px) rotate(14deg); }
+  80% { opacity: 0.6; }
+  100% { opacity: 0; transform: translate(-6px, -18px) rotate(-18deg); }
+}
+.drift-petal-3 { animation: drift-petal-3 10s ease-in-out infinite; }
+
+/* Full-Page Floating Field — spans entire viewport */
+.floating-field {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.floating-chip {
+  position: absolute;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  box-shadow: 0 4px 18px -2px color-mix(in oklab, var(--lavender) 12%, transparent),
+              0 1px 4px color-mix(in oklab, var(--ink) 4%, transparent);
+  border: 1px solid transparent;
+  cursor: default;
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+  user-select: none;
+}
+
+.floating-chip:hover {
+  opacity: 1 !important;
+  transform: translateY(-4px) scale(1.05) !important;
+  box-shadow: 0 12px 28px -2px color-mix(in oklab, var(--plum-deep) 18%, transparent),
+              0 0 16px -2px color-mix(in oklab, var(--rose) 22%, transparent);
+  z-index: 35;
+}
+
+/* ── Multilingual Greeting Pill: The Visual Highlight of Hero ── */
+.chip-greeting {
+  font-family: "Outfit", "Noto Sans", "Nirmala UI", "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.chip-greeting .chip-text {
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+/* Discreet, elegant language indicator tag */
+.chip-lang-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: "Outfit", sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  opacity: 0.58;
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: color-mix(in oklab, currentColor 10%, transparent);
+  transition: opacity 0.25s ease;
+}
+.floating-chip:hover .chip-lang-badge {
+  opacity: 0.85;
+}
+
+/* Distinct Sizes to Create Natural Harmony & Hierarchy */
+.chip-lg.chip-greeting {
+  padding: 8px 18px;
+}
+.chip-lg .chip-text {
+  font-size: clamp(15px, 1.22vw, 17.5px);
+  font-weight: 600;
+}
+.chip-lg .chip-lang-badge {
+  font-size: 9.5px;
+}
+
+.chip-md.chip-greeting {
+  padding: 6px 15px;
+}
+.chip-md .chip-text {
+  font-size: clamp(13px, 1.02vw, 15px);
+  font-weight: 550;
+}
+
+.chip-sm.chip-greeting {
+  padding: 4px 12px;
+}
+.chip-sm .chip-text {
+  font-size: clamp(11.5px, 0.88vw, 13px);
+  font-weight: 500;
+}
+.chip-sm .chip-lang-badge {
+  font-size: 8.5px;
+  padding: 1px 4px;
+}
+
+/* ── Health Term Pill: Quiet, Non-Competing Micro-Badges ── */
+.chip-term {
+  padding: 4px 12px;
+  opacity: 0.72;
+  border-style: dashed;
+}
+.chip-term .chip-text {
+  font-family: "Figtree", sans-serif;
+  font-size: clamp(11px, 0.82vw, 12px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+.chip-term:hover {
+  opacity: 0.95 !important;
+}
+
+/* ── Rich, Curated Pastel Color Harmony with High Script Contrast ── */
+.tone-pink {
+  color: #8c2a61;
+  background: color-mix(in oklab, var(--rose) 14%, rgba(255, 255, 255, 0.88));
+  border-color: color-mix(in oklab, var(--rose) 32%, transparent);
+}
+.tone-rose {
+  color: #842352;
+  background: color-mix(in oklab, var(--rose) 16%, rgba(255, 255, 255, 0.9));
+  border-color: color-mix(in oklab, var(--rose) 34%, transparent);
+}
+.tone-lavender {
+  color: #5c3570;
+  background: color-mix(in oklab, var(--lavender) 14%, rgba(255, 255, 255, 0.88));
+  border-color: color-mix(in oklab, var(--lavender) 30%, transparent);
+}
+.tone-aqua {
+  color: #1a5d68;
+  background: color-mix(in oklab, var(--aqua) 16%, rgba(255, 255, 255, 0.88));
+  border-color: color-mix(in oklab, var(--aqua) 32%, transparent);
+}
+.tone-peach {
+  color: #8c3f1e;
+  background: color-mix(in oklab, var(--peach) 16%, rgba(255, 255, 255, 0.88));
+  border-color: color-mix(in oklab, var(--peach) 32%, transparent);
+}
+
+/* Decorative Petals */
+.petal {
+  position: absolute;
+  z-index: 6;
+  width: 14px;
+  height: 8px;
+  border-radius: 100% 0 100% 0;
+  opacity: 0;
+  animation: petal-entrance .6s 1.2s forwards, petal-float 5s 1.8s ease-in-out infinite;
+}
+.petal-one { left: 28%; top: 20%; background: var(--lavender); }
+.petal-two { right: 26%; top: 38%; background: var(--rose); animation-delay: 1.4s, 2s; }
+.petal-three { left: 24%; top: 68%; background: var(--aqua); animation-delay: 1.5s, 2.1s; }
+.petal-four { right: 22%; top: 76%; background: var(--peach); animation-delay: 1.6s, 2.2s; }
+.petal-five { left: 38%; top: 12%; width: 10px; height: 6px; background: var(--rose); animation-delay: 1.8s, 2.4s; }
+.petal-six { right: 36%; top: 88%; width: 11px; height: 7px; background: var(--lavender); animation-delay: 2.0s, 2.6s; }
+
+/* Hero Copy */
+.hero-copy { position: relative; z-index: 15; margin-top: clamp(22px, 2.8vh, 30px); text-align: center; flex-shrink: 0; }
+.hero-copy h1 {
+  margin: 0;
+  font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  font-size: clamp(52px, 5.6vw, 72px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  font-style: italic;
+  background: linear-gradient(95deg, var(--plum-deep), var(--rose));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: var(--plum-deep);
+  opacity: 0;
+  animation: copy-rise .8s 0.5s ease forwards;
+}
+.tagline {
+  margin: 6px 0 0;
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 400;
+  letter-spacing: .14em;
+  color: var(--ink);
+  opacity: 0;
+  animation: copy-rise .8s 0.7s ease forwards;
+}
+
+.explore-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-top: clamp(10px, 2vh, 16px);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  opacity: 0;
+  animation: copy-rise .8s 0.9s ease forwards;
+}
+.arrow-circle {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid color-mix(in oklab, var(--rose) 58%, transparent);
+  border-radius: 50%;
+  color: var(--plum-deep);
+  background: color-mix(in oklab, var(--cream) 70%, transparent);
+  box-shadow: 0 4px 14px color-mix(in oklab, var(--rose) 18%, transparent);
+  animation: arrow-bob 2.6s 1.5s ease-in-out infinite;
+}
+.arrow-circle svg { width: 16px; height: 16px; }
+
+/* Waves */
+.waves { position: absolute; z-index: 1; inset: auto 0 0; height: clamp(65px, 9vh, 85px); opacity: 0; animation: wave-entrance 1.2s 0.4s forwards; pointer-events: none; }
+.waves svg { display: block; width: 100%; height: 100%; }
+.wave-back { fill: color-mix(in oklab, var(--lavender) 13%, transparent); }
+.wave-mid { fill: color-mix(in oklab, var(--rose) 10%, transparent); }
+.wave-front { fill: color-mix(in oklab, var(--lavender) 9%, transparent); }
+.entrance-nav { opacity: 0; animation: wave-entrance .8s .1s forwards; }
+
+/* ══════════════════════════════════════════
+   Keyframe Animations
+   ══════════════════════════════════════════ */
+
+@keyframes woman-arrive {
+  from { opacity: 0; transform: scale(1.03); filter: blur(6px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@keyframes wave-entrance {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes petal-entrance {
+  to { opacity: 0.8; }
+}
+
+@keyframes aura-pulse {
+  0% { transform: translate(-50%, -50%) scale(0.92); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1.08); opacity: 1; }
+}
+
+/* ── 8 Unique Gentle Drift Animations ──
+   Each chip gets its own calm rhythm: independent durations (7.8–13.8s),
+   organic sinusoidal translation paths, and subtle micro-rotations.
+   Maintains clear, vibrant legibility across all scripts. */
+
+@keyframes drift-gentle-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
+  25% { transform: translate(5px, -6px) rotate(0.4deg); opacity: 0.94; }
+  50% { transform: translate(-3px, -11px) rotate(-0.3deg); opacity: 0.96; }
+  75% { transform: translate(4px, -5px) rotate(0.3deg); opacity: 0.92; }
+}
+.drift-gentle-1 { animation: chip-entrance 0.8s ease forwards, drift-gentle-1 9.4s ease-in-out infinite; }
+
+@keyframes drift-gentle-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.88; }
+  30% { transform: translate(-6px, -7px) rotate(-0.5deg); opacity: 0.93; }
+  60% { transform: translate(4px, -12px) rotate(0.3deg); opacity: 0.96; }
+  80% { transform: translate(-3px, -5px) rotate(-0.2deg); opacity: 0.9; }
+}
+.drift-gentle-2 { animation: chip-entrance 0.8s ease forwards, drift-gentle-2 11.2s ease-in-out infinite; }
+
+@keyframes drift-gentle-3 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.91; }
+  35% { transform: translate(6px, -5px); opacity: 0.95; }
+  65% { transform: translate(-4px, -10px); opacity: 0.96; }
+  85% { transform: translate(3px, -3px); opacity: 0.9; }
+}
+.drift-gentle-3 { animation: chip-entrance 0.8s ease forwards, drift-gentle-3 8.6s ease-in-out infinite; }
+
+@keyframes drift-gentle-4 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.89; }
+  20% { transform: translate(-4px, -7px) rotate(0.4deg); opacity: 0.93; }
+  55% { transform: translate(5px, -6px) rotate(-0.4deg); opacity: 0.96; }
+  80% { transform: translate(-3px, -10px) rotate(0.2deg); opacity: 0.91; }
+}
+.drift-gentle-4 { animation: chip-entrance 0.8s ease forwards, drift-gentle-4 12.4s ease-in-out infinite; }
+
+@keyframes drift-gentle-5 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.88; }
+  40% { transform: translate(7px, -6px); opacity: 0.94; }
+  70% { transform: translate(-4px, -11px); opacity: 0.96; }
+}
+.drift-gentle-5 { animation: chip-entrance 0.8s ease forwards, drift-gentle-5 7.8s ease-in-out infinite; }
+
+@keyframes drift-gentle-6 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.9; }
+  30% { transform: translate(-5px, -4px) rotate(-0.4deg); opacity: 0.94; }
+  60% { transform: translate(4px, -9px) rotate(0.3deg); opacity: 0.96; }
+  85% { transform: translate(-2px, -5px) rotate(-0.2deg); opacity: 0.91; }
+}
+.drift-gentle-6 { animation: chip-entrance 0.8s ease forwards, drift-gentle-6 13.2s ease-in-out infinite; }
+
+@keyframes drift-gentle-7 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.91; }
+  25% { transform: translate(4px, -8px); opacity: 0.95; }
+  50% { transform: translate(-5px, -6px); opacity: 0.96; }
+  75% { transform: translate(3px, -4px); opacity: 0.92; }
+}
+.drift-gentle-7 { animation: chip-entrance 0.8s ease forwards, drift-gentle-7 10.2s ease-in-out infinite; }
+
+@keyframes drift-gentle-8 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.89; }
+  35% { transform: translate(-5px, -7px) rotate(0.5deg); opacity: 0.94; }
+  65% { transform: translate(6px, -12px) rotate(-0.3deg); opacity: 0.96; }
+  90% { transform: translate(-2px, -4px) rotate(0.2deg); opacity: 0.9; }
+}
+.drift-gentle-8 { animation: chip-entrance 0.8s ease forwards, drift-gentle-8 13.8s ease-in-out infinite; }
+
+/* Chip entrance: fade in with slight upward shift */
+@keyframes chip-entrance {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 0.92; transform: translateY(0); }
+}
+
+/* ── Ambient Particle Animations ──
+   Tiny soft dots that drift independently in the background */
+
+@keyframes particle-float-1 {
+  0% { opacity: 0; transform: translate(0, 0); }
+  10% { opacity: 0.45; }
+  50% { opacity: 0.55; transform: translate(12px, -18px); }
+  90% { opacity: 0.4; }
+  100% { opacity: 0; transform: translate(-4px, -30px); }
+}
+.particle-float-1 { animation: particle-float-1 14s ease-in-out infinite; }
+
+@keyframes particle-float-2 {
+  0% { opacity: 0; transform: translate(0, 0); }
+  15% { opacity: 0.4; }
+  50% { opacity: 0.5; transform: translate(-10px, -22px); }
+  85% { opacity: 0.35; }
+  100% { opacity: 0; transform: translate(6px, -36px); }
+}
+.particle-float-2 { animation: particle-float-2 16s ease-in-out infinite; }
+
+@keyframes particle-float-3 {
+  0% { opacity: 0; transform: translate(0, 0); }
+  12% { opacity: 0.5; }
+  50% { opacity: 0.6; transform: translate(8px, -14px); }
+  88% { opacity: 0.4; }
+  100% { opacity: 0; transform: translate(-8px, -26px); }
+}
+.particle-float-3 { animation: particle-float-3 11s ease-in-out infinite; }
+
+@keyframes particle-float-4 {
+  0% { opacity: 0; transform: translate(0, 0); }
+  10% { opacity: 0.38; }
+  50% { opacity: 0.52; transform: translate(-14px, -16px); }
+  90% { opacity: 0.3; }
+  100% { opacity: 0; transform: translate(4px, -28px); }
+}
+.particle-float-4 { animation: particle-float-4 18s ease-in-out infinite; }
+
+@keyframes particle-float-5 {
+  0% { opacity: 0; transform: translate(0, 0); }
+  8% { opacity: 0.42; }
+  50% { opacity: 0.55; transform: translate(6px, -20px); }
+  92% { opacity: 0.35; }
+  100% { opacity: 0; transform: translate(-10px, -32px); }
+}
+.particle-float-5 { animation: particle-float-5 13s ease-in-out infinite; }
+
+@keyframes petal-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0); }
+  50% { transform: translate3d(8px, -12px, 0) rotate(24deg); }
+}
+
+@keyframes copy-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes arrow-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ══════════════════════════════════════════
+   Responsive Styles
+   ══════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .scene { height: clamp(300px, 42vh, 360px); }
+  .woman-wrap { width: clamp(420px, 56vw, 600px); }
+  .floating-chip { opacity: 0.88; }
+  .chip-lg.chip-greeting { padding: 6px 14px; }
+  .chip-md.chip-greeting { padding: 5px 12px; }
+  .chip-sm.chip-greeting { padding: 4px 10px; }
+  .chip-term { padding: 3px 10px; }
+  .chip-lg .chip-text { font-size: 14px; }
+  .chip-md .chip-text { font-size: 12.5px; }
+  .chip-sm .chip-text { font-size: 11.5px; }
+  .chip-lang-badge { font-size: 8px; }
+}
 
 @media (max-width: 900px) {
   .rhythma-nav { grid-template-columns: 1fr auto; width: min(100% - 32px, 720px); }
   .desktop-nav { display: none; }
   .mobile-menu { display: inline-flex; }
   .nav-actions { gap: 8px; }
-  .scene { width: 100%; height: 500px; min-height: 500px; }
-  .language-bubble { min-width: 100px; padding: 9px 13px 8px; }
-  .language-orbit { transform: translate(calc(cos(var(--orbit-angle)) * 45vw), calc(sin(var(--orbit-angle)) * 158px)); }
+  .scene { width: 100%; height: clamp(280px, 40vh, 340px); min-height: 280px; }
+  .woman-wrap { width: clamp(360px, 62vw, 500px); }
+  .floating-chip { padding: 4px 10px; }
 }
 
-@media (max-width: 600px) {
-  .rhythma-page { min-height: 100svh; overflow-y: auto; }
-  .rhythma-nav { height: 64px; width: calc(100% - 28px); }
-  .brand { font-size: 20px; }.brand svg { width: 39px; height: 30px; }
+@media (max-width: 680px) {
+  .rhythma-page { height: auto; min-height: 100svh; overflow-y: auto; }
+  .rhythma-nav { height: 60px; width: calc(100% - 28px); }
+  .brand { font-size: 20px; }
+  .brand svg { width: 36px; height: 28px; }
   .download-button { display: none; }
-  .hero { min-height: calc(100svh - 64px); padding-bottom: 105px; }
-  .scene { height: 455px; min-height: 455px; transform: scale(.92); margin-top: -12px; }
-  .woman-wrap { width: 300px; bottom: 6px; }
-  .orbit-line-one { width: 68%; }.orbit-line-two { width: 99%; }.orbit-line-three { width: 124%; }
-  .language-orbit { transform: translate(calc(cos(var(--orbit-angle)) * 48vw), calc(sin(var(--orbit-angle)) * 148px)); }
-  .language-bubble { min-width: 76px; padding: 8px 10px; }
-  .language-bubble strong { font-size: 12px; }
-  .hero-copy { margin-top: 34px; padding-inline: 18px; }
-  .hero-copy h1 { font-size: 52px; }.tagline { font-size: 16px; letter-spacing: .1em; }
-  .waves { height: 95px; }
+  .hero { min-height: calc(100svh - 60px); justify-content: center; padding-bottom: 70px; }
+  .scene { height: 310px; min-height: 280px; }
+  .woman-wrap { width: clamp(300px, 84vw, 420px); bottom: 0; }
+  
+  /* On small screens, selectively show key multilingual greetings with generous spacing */
+  .chip-term { display: none; }
+  .chip-sm { display: none; }
+  .floating-chip { padding: 4px 10px; border-radius: 999px; }
+  .chip-lg .chip-text { font-size: 13px; }
+  .chip-md .chip-text { font-size: 12px; }
+  .chip-lang-badge { display: none; }
+  
+  .hero-copy { margin-top: 12px; padding-inline: 16px; }
+  .hero-copy h1 { font-size: 38px; }
+  .tagline { font-size: 13.5px; letter-spacing: .08em; }
+  .waves { height: 60px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }
-  .entrance-nav, .woman-frame, .orbit-line, .language-orbit, .language-bubble, .petal, .hero-copy h1, .tagline, .explore-link, .waves { animation: none !important; opacity: 1; }
-  .language-orbit { --orbit-angle: var(--start-angle); }
-  .language-bubble { transform: translate(-50%, -50%) scale(1); }
+  .entrance-nav, .woman-frame, .petal, .hero-copy h1, .tagline, .explore-link, .waves, .floating-chip, .center-aura, .ambient-dot, .hair-strand, .woman-photo {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+  .hair-strand {
+    filter: none !important;
+    transform: none !important;
+  }
+  .floating-chip { opacity: 0.9 !important; }
   .arrow-circle { animation: none; }
 }
