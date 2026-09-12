@@ -198,7 +198,7 @@ body { margin: 0; }
 .orbit-line-one { width: 52%; height: 50%; }
 .orbit-line-two { width: 78%; height: 64%; border-color: color-mix(in oklab, var(--aqua) 30%, transparent); transform: translate(-50%, -50%) rotate(8deg); }
 .orbit-line-three { width: 94%; height: 74%; border-color: color-mix(in oklab, var(--rose) 24%, transparent); transform: translate(-50%, -50%) rotate(-4deg); }
-.language-orbit { --orbit-duration: 38s; position: absolute; z-index: 10; inset: 2% 2% 0; offset-path: ellipse(46% 38% at 50% 50%); offset-distance: calc(var(--bubble-index) * 9.09%); offset-rotate: 0deg; animation: language-orbit var(--orbit-duration) 5s linear infinite; }
+.language-orbit { --orbit-duration: 38s; --start-angle: calc(var(--bubble-index) * 32.727deg); position: absolute; z-index: 10; left: 50%; top: 52%; width: 0; height: 0; transform: translate(calc(cos(var(--orbit-angle)) * min(43vw, 470px)), calc(sin(var(--orbit-angle)) * min(20vw, 205px))); animation: language-orbit var(--orbit-duration) 5s linear infinite; }
 .language-bubble { --bubble-delay: calc(4.25s + (var(--bubble-index) * .11s)); min-width: 118px; padding: 12px 20px; border: 1px solid transparent; border-radius: 999px; text-align: center; opacity: 0; transform: translate(-50%, -50%) scale(.7); animation: bubble-arrive .65s var(--bubble-delay) cubic-bezier(.2,.8,.2,1) forwards; backdrop-filter: blur(4px); box-shadow: 0 10px 30px color-mix(in oklab, var(--lavender) 10%, transparent); }
 .language-bubble strong { display: block; font-size: clamp(14px, 1.3vw, 19px); line-height: 1.05; font-weight: 500; }
 .tone-pink { color: #c44e94; background: color-mix(in oklab, var(--rose) 14%, var(--cream)); border-color: color-mix(in oklab, var(--rose) 25%, transparent); }
@@ -221,7 +221,8 @@ body { margin: 0; }
 
 @keyframes draw-sketch { to { stroke-dashoffset: 0; } }
 @keyframes orbit-reveal { to { opacity: 1; } }
-@keyframes language-orbit { to { offset-distance: calc((var(--bubble-index) * 9.09%) + 100%); } }
+@property --orbit-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes language-orbit { from { --orbit-angle: var(--start-angle); } to { --orbit-angle: calc(var(--start-angle) + 360deg); } }
 @keyframes bubble-arrive { to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
 @keyframes petal-float { 0%,100% { transform: translate3d(0,0,0) rotate(0); } 50% { transform: translate3d(8px,-10px,0) rotate(24deg); } }
 @keyframes copy-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
@@ -234,7 +235,7 @@ body { margin: 0; }
   .nav-actions { gap: 8px; }
   .scene { width: 100%; height: 500px; min-height: 500px; }
   .language-bubble { min-width: 100px; padding: 9px 13px 8px; }
-  .language-orbit { inset: 3% -2% 0; }
+  .language-orbit { transform: translate(calc(cos(var(--orbit-angle)) * 45vw), calc(sin(var(--orbit-angle)) * 205px)); }
 }
 
 @media (max-width: 600px) {
@@ -246,7 +247,7 @@ body { margin: 0; }
   .scene { height: 455px; min-height: 455px; transform: scale(.92); margin-top: -12px; }
   .woman-wrap { width: 260px; bottom: 6px; }
   .orbit-line-one { width: 68%; }.orbit-line-two { width: 99%; }.orbit-line-three { width: 124%; }
-  .language-orbit { inset: 1% -11% 0; offset-path: ellipse(47% 40% at 50% 50%); }
+  .language-orbit { transform: translate(calc(cos(var(--orbit-angle)) * 48vw), calc(sin(var(--orbit-angle)) * 190px)); }
   .language-bubble { min-width: 76px; padding: 8px 10px; }
   .language-bubble strong { font-size: 12px; }
   .hero-copy { margin-top: -10px; padding-inline: 18px; }
@@ -258,7 +259,7 @@ body { margin: 0; }
   *, *::before, *::after { scroll-behavior: auto !important; }
   .entrance-nav, .sketch, .orbit-line, .language-orbit, .language-bubble, .petal, .hero-copy h1, .tagline, .subtitle, .explore-link, .waves { animation: none !important; opacity: 1; }
   .sketch { stroke-dashoffset: 0; }
-  .language-orbit { offset-distance: calc(var(--bubble-index) * 9.09%); }
+  .language-orbit { --orbit-angle: var(--start-angle); }
   .language-bubble { transform: translate(-50%, -50%) scale(1); }
   .arrow-circle { animation: none; }
 }
